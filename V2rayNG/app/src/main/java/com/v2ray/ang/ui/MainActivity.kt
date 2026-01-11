@@ -1,10 +1,5 @@
 package com.v2ray.ang.ui
 
-import com.v2ray.ang.handler.AngConfigManager
-import com.v2ray.ang.handler.MmkvManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,7 +9,6 @@ import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
