@@ -5,12 +5,10 @@ plugins {
 }
 
 android {
+
     variantFilter {
         val flavorNames = flavors.map { it.name }
-        if (
-            flavorNames.contains("fdroid") ||
-            flavorNames.contains("playstore")
-        ) {
+        if (flavorNames.contains("fdroid")) {
             ignore = true
         }
     }
