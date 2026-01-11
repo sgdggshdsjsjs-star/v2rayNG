@@ -5,6 +5,9 @@ plugins {
 }
 
 android {
+    packagingOptions {
+        doNotStrip.add("**/*.so")
+    }
     namespace = "com.v2ray.ang"
     compileSdk = 36
 
