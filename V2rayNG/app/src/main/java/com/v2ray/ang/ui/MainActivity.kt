@@ -173,6 +173,35 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
         })
         mainViewModel.reloadServerList()
+        // ===== AUTO IMPORT DEFAULT CONFIG (FIRST LAUNCH) =====
+try {
+    if (MmkvManager.decodeServerConfigCount() == 0) {
+
+        val vlessUri =
+            "vless://62770d79-dc4d-07d0-b01c-ea30399725aa@filterai.ru:51191" +
+            "?type=tcp" +
+            "&security=reality" +
+            "&flow=xtls-rprx-vision" +
+            "&sni=sun6-22.userapi.com" +
+            "&fp=chrome" +
+            "&pbk=4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik" +
+            "&sid=d8c6b58bcbb0c323" +
+            "#MyVPN"
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            AngConfigManager.importBatchConfig(
+                vlessUri,
+                mainViewModel.subscriptionId,
+                true
+            )
+            withContext(Dispatchers.Main) {
+                mainViewModel.reloadServerList()
+            }
+        }
+    }
+} catch (e: Exception) {
+    Log.e(AppConfig.TAG, "Auto import failed", e)
+}
     }
 
     private fun setupViewModel() {
