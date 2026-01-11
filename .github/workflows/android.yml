@@ -29,7 +29,7 @@ jobs:
       - name: Build Debug APK
         run: |
           cd V2rayNG
-          ./gradlew assembleDebug \
+          ./gradlew assemblePlaystoreDebug \
             -x lint \
             --no-daemon \
             --stacktrace \
