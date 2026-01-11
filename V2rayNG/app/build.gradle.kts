@@ -5,6 +5,12 @@ plugins {
 }
 
 android {
+    variantFilter {
+        val flavorNames = flavors.map { it.name }
+        if (flavorNames.contains("fdroid")) {
+            ignore = true
+        }
+    }
     packagingOptions {
         doNotStrip.add("**/*.so")
     }
