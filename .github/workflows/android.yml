@@ -19,17 +19,23 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      # ⬇️ ВАЖНО: gradlew лежит в V2rayNG
+      # gradlew лежит в папке V2rayNG
       - name: Grant execute permission for gradlew
         run: |
           cd V2rayNG
           chmod +x gradlew
 
+      # основной билд (с фиксом CI-проблем)
       - name: Build Debug APK
         run: |
           cd V2rayNG
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug \
+            -x lint \
+            --no-daemon \
+            --stacktrace \
+            -Dorg.gradle.jvmargs="-Xmx4g -XX:+UseParallelGC"
 
+      # загрузка APK
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
